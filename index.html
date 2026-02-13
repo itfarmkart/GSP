@@ -191,6 +191,18 @@
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .calendar-day-number {
+            font-size: 1rem;
+            margin-bottom: 2px;
         }
 
         .calendar-day:hover:not(.empty):not(.past):not(.full) {
@@ -524,7 +536,7 @@
                         <div class="calendar-day-header">Sat</div>
                     </div>
 
-                    <div class="calendar-grid">
+                    <div id="calendar-days" class="calendar-grid">
                         <!-- JS injected days -->
                     </div>
                 </div>

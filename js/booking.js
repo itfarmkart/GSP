@@ -15,7 +15,7 @@ window.toggleComplaintField = function (show) {
 }
 
 function initBookingSystem() {
-    const calendarGrid = document.querySelector('.calendar-grid');
+    const calendarGrid = document.getElementById('calendar-days') || document.querySelector('.calendar-grid');
     const currentMonthEl = document.getElementById('currentMonth');
     const bookingForm = document.getElementById('bookingForm');
     const bookingModal = document.getElementById('bookingModal');
@@ -122,7 +122,11 @@ function initBookingSystem() {
         for (let day = 1; day <= daysInMonth; day++) {
             const dayEl = document.createElement('div');
             dayEl.className = 'calendar-day';
-            dayEl.textContent = day;
+
+            const dayNumber = document.createElement('span');
+            dayNumber.className = 'calendar-day-number';
+            dayNumber.textContent = day;
+            dayEl.appendChild(dayNumber);
 
             const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
