@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Gajendra Singh Patel</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* About Page Styles */
+        .bio-section {
+            background: white;
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .bio-image {
+            position: relative;
+        }
+
+        .bio-image img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 2;
+            position: relative;
+        }
+
+        .bio-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--color-saffron);
+            border-radius: var(--radius-md);
+            z-index: 1;
+        }
+
+        .quote-box {
+            background: var(--color-off-white);
+            padding: 2rem;
+            border-left: 5px solid var(--color-saffron);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 2rem 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        /* Timeline Styles */
+        .timeline-section {
+            background: var(--color-off-white);
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        .timeline-line-progress {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 0%;
+            background: var(--color-saffron);
+            z-index: 2;
+            transition: height 0.1s linear;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50px;
+            position: relative;
+            margin-bottom: 60px;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            padding-left: 50px;
+            padding-right: 0;
+            margin-left: 50%;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--color-saffron);
+            border-radius: 50%;
+            z-index: 3;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: auto;
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            width: 100%;
+            position: relative;
+        }
+
+        .timeline-year {
+            background: var(--color-saffron);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-saffron-dark);
+        }
+
+        /* Vision Section */
+        .ideology-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .ideology-item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 5px solid white;
+            box-shadow: var(--shadow-md);
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .bio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line,
+            .timeline-line-progress {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 0;
+                margin-left: 0;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                padding-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 10px !important;
+                right: auto;
+            }
+
+            .ideology-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/GSP LOGO/PNG/GSP LOGO FINAL-26.png" alt="GSP Logo">
+                <div class="logo-text">
+                    <span class="logo-title">गजेन्द्र सिंह पटेल</span>
+                    <span class="logo-subtitle">M.P. Khargone-Barwani</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                        <span class="lang-en">Home</span>
+                        <span class="lang-hi" style="display:none">होम</span>
+                    </a></li>
+                <li><a href="about.html" class="nav-link active">
+                        <span class="lang-en">About</span>
+                        <span class="lang-hi" style="display:none">परिचय</span>
+                    </a></li>
+                <li><a href="parliament.html" class="nav-link">
+                        <span class="lang-en">Parliamentary Work</span>
+                        <span class="lang-hi" style="display:none">संसदीय कार्य</span>
+                    </a></li>
+                <li><a href="gallery.html" class="nav-link">
+                        <span class="lang-en">Gallery</span>
+                        <span class="lang-hi" style="display:none">गैलरी</span>
+                    </a></li>
+                <li><a href="contact.html" class="nav-link">
+                        <span class="lang-en">Contact</span>
+                        <span class="lang-hi" style="display:none">संपर्क</span>
+                    </a></li>
+                <li style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="index.html#book-meeting" class="nav-cta">
+                        <span class="lang-en">Book Appointment</span>
+                        <span class="lang-hi" style="display:none">मिलने का समय लें</span>
+                    </a>
+                    <button id="lang-toggle" class="btn"
+                        style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--color-off-white); color: var(--color-saffron); border: 1px solid var(--color-saffron);">
+                        हिंदी में पढ़ें
+                    </button>
+                </li>
+            </ul>
+
+            <button class="mobile-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header"
+        style="background: var(--gradient-hero); padding: 120px 0 60px 0; color: white; text-align: center; position: relative;">
+
+
+
+        <div class="container">
+            <h1 class="main-title lang-en" style="margin-bottom: 0; font-size: 3rem;">Journey of Service</h1>
+            <h1 class="main-title lang-hi" style="margin-bottom: 0; font-size: 3rem; display: none;">जनसेवा ही धर्म</h1>
+
+            <p class="lang-en" style="opacity: 0.9; margin-top: 1rem;">From grassroots worker to the voice of
+                Khargone-Barwani</p>
+            <p class="lang-hi" style="opacity: 0.9; margin-top: 1rem; display: none;">जनसेवा, सुशासन और जनजातीय उत्थान
+                के लिए प्रतिबद्ध नेतृत्व</p>
+        </div>
+    </header>
+
+    <!-- Biography Section -->
+    <section class="bio-section">
+        <div class="container">
+            <div class="bio-grid">
+                <div class="bio-image reveal slide-in-left">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.48.14 AM.jpeg" alt="Gajendra Singh Patel">
+                </div>
+
+                <div class="bio-content reveal slide-in-right">
+                    <h2 class="section-title lang-en">A Life Dedicated to Nation</h2>
+                    <h2 class="section-title lang-hi" style="display: none;">व्यक्तिगत परिचय</h2>
+
+                    <div class="lang-en">
+                        <p style="margin-bottom: 1rem;">
+                            Born on <strong>16th February 1975</strong> in Barwani, Madhya Pradesh, Gajendra Singh Patel
+                            comes from a family where service, education, and social responsibility were core values.
+                            His
+                            father, the late Shri Umrao Singh Patel, was a former Education Minister of Madhya Pradesh.
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            With a background in BA and LLB, his education instilled in him a deep understanding of
+                            constitutional values and social justice. For over 34 years, he has been tirelessly working
+                            for
+                            the organization and society.
+                        </p>
+                    </div>
+
+                    <div class="lang-hi" style="display: none;">
+                        <p style="margin-bottom: 1rem;">
+                            गजेन्द्रसिंह पटेल का जन्म <strong>16 फ़रवरी 1975</strong> को बड़वानी, जिला बड़वानी
+                            (मध्यप्रदेश) में हुआ। वे एक ऐसे परिवार से आते हैं जहाँ सेवा, शिक्षा और समाज के प्रति
+                            उत्तरदायित्व को जीवन का मूल मूल्य माना गया है। उनके पिता स्वर्गीय श्री उमरावसिंह जी पटेल
+                            मध्यप्रदेश शासन में भूतपूर्व शिक्षा मंत्री रहे।
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            गजेन्द्रसिंह पटेल ने बी.ए. एवं एल.एल.बी. की शिक्षा प्राप्त की। उनकी शैक्षणिक पृष्ठभूमि ने
+                            उन्हें संवैधानिक मूल्यों, सामाजिक न्याय और लोकतांत्रिक व्यवस्था की गहरी समझ प्रदान की। पिछले
+                            34 वर्षों से अधिक समय से वे सामाजिक और राजनीतिक जीवन में पूरी निष्ठा के साथ कार्यरत हैं।
+                        </p>
+                    </div>
+
+                    <div class="quote-box lang-en">
+                        "Politics is not a means to power, but a medium to serve the nation and uplift the last person
+                        in the society."
+                    </div>
+                    <div class="quote-box lang-hi" style="display: none;">
+                        "राजनीति सत्ता प्राप्त करने का साधन नहीं, बल्कि राष्ट्र सेवा और समाज के अंतिम व्यक्ति के उत्थान
+                        का माध्यम है।"
+                    </div>
+
+                    <h3 class="lang-en" style="color: var(--color-saffron-dark); margin-bottom: 0.5rem;">Vision &
+                        Ideology</h3>
+                    <h3 class="lang-hi" style="color: var(--color-saffron-dark); margin-bottom: 0.5rem; display: none;">
+                        प्रेरणा और दृष्टिकोण</h3>
+
+                    <p class="lang-en">
+                        Inspired by <strong>Pt. Deendayal Upadhyay's 'Antyodaya'</strong>, he believes that development
+                        is incomplete until it reaches the last person in the line. His focus remains on tribal welfare,
+                        rural development, and social security.
+                    </p>
+                    <p class="lang-hi" style="display: none;">
+                        उनका दृष्टिकोण अंत्योदय की भावना से प्रेरित है, जहाँ विकास का मापदंड वही व्यक्ति है जो समाज की
+                        अंतिम पंक्ति में खड़ा है। विशेष रूप से जनजातीय समाज, ग्रामीण भारत और वंचित वर्गों के सर्वांगीण
+                        विकास को वे राष्ट्र निर्माण की अनिवार्य शर्त मानते हैं।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title lang-en">Political Timeline</h2>
+                <h2 class="section-title lang-hi" style="display: none;">राजनीतिक सफर</h2>
+
+                <p class="section-subtitle lang-en">A journey of dedication, struggle, and unwavering commitment to the
+                    people.</p>
+                <p class="section-subtitle lang-hi" style="display: none;">जनता के प्रति समर्पण, संघर्ष और अटूट
+                    प्रतिबद्धता की एक यात्रा।</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-line-progress"></div>
+
+                <!-- 1990 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">1990</span>
+                        <h3 class="timeline-title lang-en">Beginning of Public Life</h3>
+                        <h3 class="timeline-title lang-hi" style="display: none;">सार्वजनिक जीवन की शुरुआत</h3>
+
+                        <p class="lang-en">Started social service through RSS and student activism with ABVP.
+                            Organizational work at
+                            Tehsil and District levels connected him directly with the masses.</p>
+                        <p class="lang-hi" style="display: none;">गजेन्द्रसिंह पटेल ने अपने सार्वजनिक जीवन की शुरुआत
+                            1990 के दशक में की। इस दौरान वे राष्ट्रीय स्वयंसेवक संघ से जुड़कर सामाजिक सेवा के कार्यों
+                            में सक्रिय रहे। अखिल भारतीय विद्यार्थी परिषद के माध्यम से छात्र जीवन में संगठनात्मक
+                            जिम्मेदारियाँ निभाईं।</p>
+                    </div>
+                </div>
+
+                <!-- 2000 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2000</span>
+                        <h3 class="timeline-title lang-en">Leadership in Organization</h3>
+                        <h3 class="timeline-title lang-hi" style="display: none;">संगठन से नेतृत्व की ओर</h3>
+
+                        <p class="lang-en">Appointed District General Secretary of BJYM. Active role in Kamal Vahini and
+                            social
+                            movements focused on tribal welfare and women empowerment.</p>
+                        <p class="lang-hi" style="display: none;">वे भारतीय जनता युवा मोर्चा में जिला महामंत्री बने और
+                            युवाओं को संगठन से जोड़ने का कार्य किया। इसके साथ ही वे कमलवाहिनी के जिला संयोजक रहे। इस
+                            कालखंड में उन्होंने जनजातीय समाज, महिला सशक्तिकरण और सामाजिक न्याय से जुड़े आंदोलनों में
+                            सक्रिय भूमिका निभाई।</p>
+                    </div>
+                </div>
+
+                <!-- 2010 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2010</span>
+                        <h3 class="timeline-title lang-en">State Level Responsibilities</h3>
+                        <h3 class="timeline-title lang-hi" style="display: none;">प्रदेश स्तर पर जिम्मेदारियाँ</h3>
+
+                        <p class="lang-en">Became State General Secretary of ST Morcha, MP. Later served two terms as
+                            State President of
+                            ST Morcha, leading tribal development initiatives across the state.</p>
+                        <p class="lang-hi" style="display: none;">वे अनुसूचित जनजाति मोर्चा, मध्यप्रदेश के प्रदेश
+                            महामंत्री बने और बाद में दो बार प्रदेश अध्यक्ष के रूप में संगठन का नेतृत्व किया। इस दौरान
+                            उन्होंने जनजातीय विकास, सामाजिक सुरक्षा और संगठन विस्तार के लिए प्रदेशभर में व्यापक कार्य
+                            किया।</p>
+                    </div>
+                </div>
+
+                <!-- 2019 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2019</span>
+                        <h3 class="timeline-title lang-en">Elected to 17th Lok Sabha</h3>
+                        <h3 class="timeline-title lang-hi" style="display: none;">लोकसभा में प्रवेश</h3>
+
+                        <p class="lang-en">Elected as Member of Parliament from Khargone-Barwani. Strong voice for
+                            regional development
+                            and tribal rights in the Parliament.</p>
+                        <p class="lang-hi" style="display: none;">गजेन्द्रसिंह पटेल खरगोन–बड़वानी लोकसभा क्षेत्र से
+                            सांसद चुने गए और 17वीं लोकसभा के सदस्य बने। संसद में रहते हुए उन्होंने क्षेत्रीय विकास,
+                            जनजातीय हितों और सामाजिक न्याय से जुड़े मुद्दों को मजबूती से उठाया।</p>
+                    </div>
+                </div>
+
+                <!-- 2020 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2020-2023</span>
+                        <h3 class="timeline-title lang-en">National General Secretary</h3>
+                        <h3 class="timeline-title lang-hi" style="display: none;">राष्ट्रीय दायित्व</h3>
+
+                        <p class="lang-en">Appointed National General Secretary of BJP ST Morcha. Led organizational
+                            expansion in 11
+                            states and successful Micro Donation campaigns.</p>
+                        <p class="lang-hi" style="display: none;">उन्हें भारतीय जनता पार्टी अजजा मोर्चा का राष्ट्रीय
+                            महामंत्री नियुक्त किया गया। देश के 11 से अधिक राज्यों में संगठनात्मक विस्तार, चुनाव संचालन
+                            और जनसंपर्क अभियानों का नेतृत्व किया।</p>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-year">2024</span>
+                        <h3 class="timeline-title lang-en">Re-elected to 18th Lok Sabha</h3>
+                        <h3 class="timeline-title lang-hi" style="display: none;">18वीं लोकसभा हेतु पुनः निर्वाचित</h3>
+
+                        <p class="lang-en">Re-elected with people's trust to serve the 18th Lok Sabha. Continuing the
+                            mission of 'Sabka
+                            Saath, Sabka Vikas' with renewed vigor.</p>
+                        <p class="lang-hi" style="display: none;">2024 में गजेन्द्रसिंह पटेल पुनः खरगोन–बड़वानी लोकसभा
+                            क्षेत्र से 18वीं लोकसभा के लिए सांसद चुने गए। वर्तमान में वे संसद और संगठन दोनों स्तरों पर
+                            सक्रिय रहते हुए जनजातीय क्षेत्रों, ग्रामीण विकास, सामाजिक कल्याण और सुशासन के लिए निरंतर
+                            कार्य कर रहे हैं।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspiration Section -->
+    <section style="background: white;">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title lang-en">Our Inspiration</h2>
+                <h2 class="section-title lang-hi" style="display: none;">प्रेरणा स्रोत</h2>
+
+                <p class="section-subtitle lang-en">Guided by the principles of great visionary leaders.</p>
+                <p class="section-subtitle lang-hi" style="display: none;">महान दूरदर्शी नेताओं के सिद्धांतों से
+                    प्रेरित।</p>
+            </div>
+
+            <div class="ideology-grid">
+                <div class="ideology-item reveal delay-100">
+                    <img src="assets/images/deendayal_upadhyay.png" alt="Pt. Deendayal Upadhyay">
+                    <h3 class="lang-en">Pt. Deendayal Upadhyay</h3>
+                    <h3 class="lang-hi" style="display: none;">पं. दीनदयाल उपाध्याय</h3>
+
+                    <p class="lang-en" style="color: var(--text-secondary); font-size: 0.9rem;">Integral Humanism &
+                        Antyodaya</p>
+                    <p class="lang-hi" style="color: var(--text-secondary); font-size: 0.9rem; display: none;">एकात्म
+                        मानववाद और अंत्योदय</p>
+                </div>
+
+                <div class="ideology-item reveal delay-200">
+                    <img src="assets/images/atal_bihari_vajpayee.png" alt="Atal Bihari Vajpayee">
+                    <h3 class="lang-en">Atal Bihari Vajpayee</h3>
+                    <h3 class="lang-hi" style="display: none;">अटल बिहारी वाजपेयी</h3>
+
+                    <p class="lang-en" style="color: var(--text-secondary); font-size: 0.9rem;">Good Governance & Peace
+                    </p>
+                    <p class="lang-hi" style="color: var(--text-secondary); font-size: 0.9rem; display: none;">सुशासन और
+                        शांति</p>
+                </div>
+
+                <div class="ideology-item reveal delay-300">
+                    <img src="assets/images/narendra_modi.png" alt="PM Narendra Modi">
+                    <h3 class="lang-en">Narendra Modi</h3>
+                    <h3 class="lang-hi" style="display: none;">नरेंद्र मोदी</h3>
+
+                    <p class="lang-en" style="color: var(--text-secondary); font-size: 0.9rem;">New India & Self
+                        Reliance</p>
+                    <p class="lang-hi" style="color: var(--text-secondary); font-size: 0.9rem; display: none;">नया भारत
+                        और आत्मनिर्भरता</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Include (Same as Index) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>About GSP</h4>
+                    <p style="color: #aaa; margin-bottom: 1rem;">Gajendra Singh Patel is a dedicated social worker and
+                        Member of Parliament serving the Khargone-Barwani constituency.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Biography</a></li>
+                        <li><a href="parliament.html">Parliament Work</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-links">
+                        <li>📍 MP Office, Barwani, M.P.</li>
+                        <li>📧 contact@gspbjp.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Gajendra Singh Patel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/timeline.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Gajendra Singh Patel</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Contact Specific Styles */
+        .contact-section {
+            padding: var(--spacing-lg) 0;
+            background: white;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info-card {
+            background: var(--gradient-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            height: 100%;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            background: var(--color-saffron);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-saffron-dark);
+        }
+
+        .info-content p {
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            border-top: 5px solid var(--color-saffron);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-saffron);
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
+        }
+
+        .map-section {
+            height: 400px;
+            background: #eee;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: url('https://placehold.co/1200x400/png?text=Map+Location:+Barwani+Office') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/GSP LOGO/PNG/GSP LOGO FINAL-26.png" alt="GSP Logo">
+                <div class="logo-text">
+                    <span class="logo-title">गजेन्द्र सिंह पटेल</span>
+                    <span class="logo-subtitle">M.P. Khargone-Barwani</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                        <span class="lang-en">Home</span>
+                        <span class="lang-hi" style="display:none">होम</span>
+                    </a></li>
+                <li><a href="about.html" class="nav-link">
+                        <span class="lang-en">About</span>
+                        <span class="lang-hi" style="display:none">परिचय</span>
+                    </a></li>
+                <li><a href="parliament.html" class="nav-link">
+                        <span class="lang-en">Parliamentary Work</span>
+                        <span class="lang-hi" style="display:none">संसदीय कार्य</span>
+                    </a></li>
+                <li><a href="gallery.html" class="nav-link">
+                        <span class="lang-en">Gallery</span>
+                        <span class="lang-hi" style="display:none">गैलरी</span>
+                    </a></li>
+                <li><a href="contact.html" class="nav-link active">
+                        <span class="lang-en">Contact</span>
+                        <span class="lang-hi" style="display:none">संपर्क</span>
+                    </a></li>
+                <li style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="index.html#book-meeting" class="nav-cta">
+                        <span class="lang-en">Book Appointment</span>
+                        <span class="lang-hi" style="display:none">मिलने का समय लें</span>
+                    </a>
+                    <button id="lang-toggle" class="btn"
+                        style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--color-off-white); color: var(--color-saffron); border: 1px solid var(--color-saffron);">
+                        हिंदी में पढ़ें
+                    </button>
+                </li>
+            </ul>
+
+            <button class="mobile-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header"
+        style="background: var(--gradient-hero); padding: 120px 0 100px 0; color: white; text-align: center;">
+        <div class="container">
+            <h1 class="main-title reveal lang-en" style="margin-bottom: 0; font-size: 3rem;">Connect With Us</h1>
+            <h1 class="main-title reveal lang-hi" style="margin-bottom: 0; font-size: 3rem; display:none;">हमसे जुड़ें
+            </h1>
+
+            <p class="reveal delay-100 lang-en" style="opacity: 0.9; margin-top: 1rem;">We are here to listen and serve.
+                Get in touch with our office.</p>
+            <p class="reveal delay-100 lang-hi" style="opacity: 0.9; margin-top: 1rem; display:none;">हम सुनने और सेवा
+                के लिए तत्पर हैं। हमारे कार्यालय से संपर्क करें।</p>
+        </div>
+    </header>
+
+    <!-- Contact Content -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Info Side -->
+                <div class="contact-info-card reveal slide-in-left">
+                    <h2 style="margin-bottom: 2rem;">Office Information</h2>
+
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Constituency Office (Barwani)</h3>
+                            <p>123, Main Road, Near Bus Stand,</p>
+                            <p>Barwani, Madhya Pradesh - 451551</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">🏛️</div>
+                        <div class="info-content">
+                            <h3>Delhi Residence</h3>
+                            <p>45, North Avenue,</p>
+                            <p>New Delhi - 110001</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Phone & Email</h3>
+                            <p>+91 98765 43210 (Barwani Office)</p>
+                            <p>contact@gspbjp.in</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">🌐</div>
+                        <div class="info-content">
+                            <h3>Social Media</h3>
+                            <div class="social-icons" style="margin-top: 0.5rem; justify-content: flex-start;">
+                                <a href="#" class="social-icon" style="background: var(--color-saffron);">TW</a>
+                                <a href="#" class="social-icon" style="background: var(--color-saffron);">FB</a>
+                                <a href="#" class="social-icon" style="background: var(--color-saffron);">IG</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="contact-form-container reveal slide-in-right">
+                    <h2 style="margin-bottom: 0.5rem;">Send a Message</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">For suggestions, grievances, or
+                        appointment requests.</p>
+
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" required placeholder="Your Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" required placeholder="your@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <select class="form-input">
+                                <option>General Suggestion</option>
+                                <option>Grievance Redressal</option>
+                                <option>Appointment Request</option>
+                                <option>Media Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-input" rows="5" required
+                                placeholder="Type your message here..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Placeholder -->
+    <div class="map-section reveal">
+        <div class="map-placeholder">
+            <!-- Google Maps Embed would go here -->
+            <button class="btn btn-secondary" style="background: white;">View on Google Maps</button>
+        </div>
+    </div>
+
+    <!-- Footer Include -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>About GSP</h4>
+                    <p style="color: #aaa; margin-bottom: 1rem;">Gajendra Singh Patel is a dedicated social worker and
+                        Member of Parliament serving the Khargone-Barwani constituency.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Biography</a></li>
+                        <li><a href="parliament.html">Parliament Work</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-links">
+                        <li>📍 MP Office, Barwani, M.P.</li>
+                        <li>📧 contact@gspbjp.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Gajendra Singh Patel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Simple Form Handler
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message. We will get back to you shortly.');
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+.DS_Store
+*.docx
+*.pdf
+*.pdf.png
+about_content.txt
+node_modules
+.vercel

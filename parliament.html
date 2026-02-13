@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parliamentary Work | Gajendra Singh Patel</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Parliament Page specific styles */
+        .stats-hero {
+            background: var(--color-saffron);
+            color: white;
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .work-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border-bottom: 5px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-bottom-color: var(--color-saffron);
+        }
+
+        .work-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-saffron);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        /* Accordion List */
+        .accordion-item {
+            background: white;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: var(--color-off-white);
+        }
+
+        .accordion-header.active {
+            background: var(--color-saffron-light);
+            color: white;
+        }
+
+        .accordion-header.active h3 {
+            color: white;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+
+        .accordion-content.open {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .list-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-icon {
+            color: var(--color-saffron);
+            min-width: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--color-saffron);
+            border-radius: var(--radius-full);
+            background: transparent;
+            color: var(--color-saffron);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--color-saffron);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @media (max-width: 768px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/GSP LOGO/PNG/GSP LOGO FINAL-26.png" alt="GSP Logo">
+                <div class="logo-text">
+                    <span class="logo-title">गजेन्द्र सिंह पटेल</span>
+                    <span class="logo-subtitle">M.P. Khargone-Barwani</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                        <span class="lang-en">Home</span>
+                        <span class="lang-hi" style="display:none">होम</span>
+                    </a></li>
+                <li><a href="about.html" class="nav-link">
+                        <span class="lang-en">About</span>
+                        <span class="lang-hi" style="display:none">परिचय</span>
+                    </a></li>
+                <li><a href="parliament.html" class="nav-link active">
+                        <span class="lang-en">Parliamentary Work</span>
+                        <span class="lang-hi" style="display:none">संसदीय कार्य</span>
+                    </a></li>
+                <li><a href="gallery.html" class="nav-link">
+                        <span class="lang-en">Gallery</span>
+                        <span class="lang-hi" style="display:none">गैलरी</span>
+                    </a></li>
+                <li><a href="contact.html" class="nav-link">
+                        <span class="lang-en">Contact</span>
+                        <span class="lang-hi" style="display:none">संपर्क</span>
+                    </a></li>
+                <li style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="index.html#book-meeting" class="nav-cta">
+                        <span class="lang-en">Book Appointment</span>
+                        <span class="lang-hi" style="display:none">मिलने का समय लें</span>
+                    </a>
+                    <button id="lang-toggle" class="btn"
+                        style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--color-off-white); color: var(--color-saffron); border: 1px solid var(--color-saffron);">
+                        हिंदी में पढ़ें
+                    </button>
+                </li>
+            </ul>
+
+            <button class="mobile-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header"
+        style="background: var(--gradient-bjp); padding: 120px 0 60px 0; color: white; text-align: center;">
+        <div class="container">
+            <h1 class="main-title lang-en" style="margin-bottom: 0; font-size: 3rem;">Parliamentary Performance</h1>
+            <h1 class="main-title lang-hi" style="margin-bottom: 0; font-size: 3rem; display:none;">संसदीय कार्य
+                प्रदर्शन</h1>
+
+            <p class="lang-en" style="opacity: 0.9; margin-top: 1rem;">18th Lok Sabha - Serving with dedication and
+                accountability</p>
+            <p class="lang-hi" style="opacity: 0.9; margin-top: 1rem; display:none;">18वीं लोकसभा - समर्पण और जवाबदेही
+                के साथ सेवा</p>
+        </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <section>
+        <div class="container">
+            <div class="work-grid" style="margin-top: -50px; position: relative; z-index: 10;">
+                <div class="work-card reveal">
+                    <div class="work-number counter-value" data-target="92">0</div>
+                    <h3>Attendance %</h3>
+                    <p style="color: #666;">Consistent presence to represent you</p>
+                </div>
+
+                <div class="work-card reveal delay-200">
+                    <div class="work-number counter-value" data-target="66">0</div>
+                    <h3>Questions Raised</h3>
+                    <p style="color: #666;">Highlighting critical regional issues</p>
+                </div>
+
+                <div class="work-card reveal delay-400">
+                    <div class="work-number counter-value" data-target="11">0</div>
+                    <h3>Debates</h3>
+                    <p style="color: #666;">Participated in key legislations</p>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tab-buttons reveal">
+                <button class="tab-btn active" onclick="openTab(event, 'debates')">Key Debates (11)</button>
+                <button class="tab-btn" onclick="openTab(event, 'questions')">Questions Highlights (66)</button>
+            </div>
+
+            <!-- Debates Content -->
+            <div id="debates" class="tab-content active reveal">
+                <h3 style="margin-bottom: 2rem; border-left: 5px solid var(--color-green); padding-left: 1rem;">Recent
+                    Participation in Debates</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header active">
+                        <h3>Infrastructure & Railways</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content open">
+                        <div class="list-item">
+                            <span class="list-icon">🚆</span>
+                            <p><strong>04.12.2024:</strong> Request to minister to approve the survey for a new railway
+                                line connecting Khandwa to Khargone via Barwani at the earliest.</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">🛤️</span>
+                            <p>Regarding need to expedite action on Khandwa-Alirajpur rail line project in Madhya
+                                Pradesh.</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">🚧</span>
+                            <p>Expedite Approval and Land Clearance for Khargone-Khandwa New Broad Gauge Rail Line
+                                Project.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Health & Education</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="list-item">
+                            <span class="list-icon">🩸</span>
+                            <p><strong>07.08.2024:</strong> Request to minister to include sickle cell anemia in
+                                Ayushman card scheme and pension involved should be increased to 2500.</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">🏫</span>
+                            <p><strong>02.04.2025:</strong> Regarding need to increase sections from class I to VIII and
+                                introduce teaching of all subjects in class XI and XII in Kendriya Vidyalaya, Kasrawad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Budget & Policy</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="list-item">
+                            <span class="list-icon">💰</span>
+                            <p><strong>10.02.2025:</strong> Discussion on The Union Budget – 2025-2026.</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">📜</span>
+                            <p>Review Supreme Court Ruling on Caste Certificates and Formulate a Uniform National Policy
+                                to Prevent Misuse.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions Content -->
+            <div id="questions" class="tab-content">
+                <h3 style="margin-bottom: 2rem; border-left: 5px solid var(--color-saffron); padding-left: 1rem;">Key
+                    Questions Raised</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header active">
+                        <h3>Health & Family Welfare</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content open">
+                        <div class="list-item">
+                            <span class="list-icon">⚕️</span>
+                            <p>Treatment of Sickle Cell Anemia</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">🏥</span>
+                            <p>Medical College in Barwani</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">💉</span>
+                            <p>Treatment of Thalassemia under AB-PMJAY</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Tribal Affairs & Development</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="list-item">
+                            <span class="list-icon">🏹</span>
+                            <p>Expansion of Eklavya Model Residential Schools (EMRS)</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">🏚️</span>
+                            <p>Targets and achievements under PM-JANMAN</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">⚖️</span>
+                            <p>Free Legal Aid Services in Tribal and Remote Areas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Infrastructure & Digital</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="list-item">
+                            <span class="list-icon">📡</span>
+                            <p>Installation of Mobile Towers in Khargone-Barwani</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">🛣️</span>
+                            <p>Construction of Bypass Roads</p>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-icon">☀️</span>
+                            <p>Development of Solar City</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer Include -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>About GSP</h4>
+                    <p style="color: #aaa; margin-bottom: 1rem;">Gajendra Singh Patel is a dedicated social worker and
+                        Member of Parliament serving the Khargone-Barwani constituency.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Biography</a></li>
+                        <li><a href="parliament.html">Parliament Work</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-links">
+                        <li>📍 MP Office, Barwani, M.P.</li>
+                        <li>📧 contact@gspbjp.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Gajendra Singh Patel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Tab Logic
+        function openTab(evt, tabName) {
+            var i, tabContent, tabBtns;
+
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+                tabContent[i].classList.remove("active");
+            }
+
+            tabBtns = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].className = tabBtns[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            // Small delay to trigger animation
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            evt.currentTarget.className += " active";
+        }
+
+        // Accordion Logic
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                // Close others if needed (optional)
+                const content = header.nextElementSibling;
+
+                header.classList.toggle('active');
+                if (content.classList.contains('open')) {
+                    content.classList.remove('open');
+                    content.style.display = 'none';
+                } else {
+                    content.classList.add('open');
+                    content.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

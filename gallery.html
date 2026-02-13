@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery | Gajendra Singh Patel</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        /* Gallery Specific Styles */
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--color-saffron);
+            color: var(--color-saffron);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--color-saffron);
+            color: white;
+        }
+
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .zoom-icon {
+            color: white;
+            font-size: 2rem;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gallery-item:hover .zoom-icon {
+            transform: scale(1);
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background: #000;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-btn::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 16px solid var(--color-saffron);
+            margin-left: 5px;
+        }
+
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: white;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/GSP LOGO/PNG/GSP LOGO FINAL-26.png" alt="GSP Logo">
+                <div class="logo-text">
+                    <span class="logo-title">गजेन्द्र सिंह पटेल</span>
+                    <span class="logo-subtitle">M.P. Khargone-Barwani</span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                        <span class="lang-en">Home</span>
+                        <span class="lang-hi" style="display:none">होम</span>
+                    </a></li>
+                <li><a href="about.html" class="nav-link">
+                        <span class="lang-en">About</span>
+                        <span class="lang-hi" style="display:none">परिचय</span>
+                    </a></li>
+                <li><a href="parliament.html" class="nav-link">
+                        <span class="lang-en">Parliamentary Work</span>
+                        <span class="lang-hi" style="display:none">संसदीय कार्य</span>
+                    </a></li>
+                <li><a href="gallery.html" class="nav-link active">
+                        <span class="lang-en">Gallery</span>
+                        <span class="lang-hi" style="display:none">गैलरी</span>
+                    </a></li>
+                <li><a href="contact.html" class="nav-link">
+                        <span class="lang-en">Contact</span>
+                        <span class="lang-hi" style="display:none">संपर्क</span>
+                    </a></li>
+                <li style="display: flex; align-items: center; gap: 1rem;">
+                    <a href="index.html#book-meeting" class="nav-cta">
+                        <span class="lang-en">Book Appointment</span>
+                        <span class="lang-hi" style="display:none">मिलने का समय लें</span>
+                    </a>
+                    <button id="lang-toggle" class="btn"
+                        style="padding: 0.5rem 1rem; font-size: 0.8rem; background: var(--color-off-white); color: var(--color-saffron); border: 1px solid var(--color-saffron);">
+                        हिंदी में पढ़ें
+                    </button>
+                </li>
+            </ul>
+
+            <button class="mobile-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="background: var(--gradient-bjp); padding: 120px 0 60px 0; color: white; text-align: center;">
+        <div class="container">
+            <h1 class="main-title lang-en" style="margin-bottom: 0; font-size: 3rem;">Media Gallery</h1>
+            <h1 class="main-title lang-hi" style="margin-bottom: 0; font-size: 3rem; display:none;">मीडिया गैलरी</h1>
+
+            <p class="lang-en" style="opacity: 0.9; margin-top: 1rem;">Glimpses of interactions, public meetings, and
+                developmental works</p>
+            <p class="lang-hi" style="opacity: 0.9; margin-top: 1rem; display:none;">संवाद, जनसभाओं और विकास कार्यों की
+                झलकियां</p>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <!-- Filter -->
+            <div class="gallery-nav reveal">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="events">Public Events</button>
+                <button class="filter-btn" data-filter="parliament">Parliament</button>
+                <button class="filter-btn" data-filter="visits">Field Visits</button>
+            </div>
+
+            <!-- Photo Grid -->
+            <div class="masonry-grid reveal delay-100">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.51 AM.jpeg" alt="Public Event">
+                    <div class="gallery-overlay">
+                        <span class="zoom-icon">+</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.52 AM.jpeg" alt="Community Event">
+                    <div class="gallery-overlay">
+                        <span class="zoom-icon">+</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.53 AM (1).jpeg" alt="Parliament Speech">
+                    <div class="gallery-overlay">
+                        <span class="zoom-icon">+</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.52 AM (1).jpeg" alt="Field Visit">
+                    <div class="gallery-overlay">
+                        <span class="zoom-icon">+</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.54 AM.jpeg" alt="Youth Rally">
+                    <div class="gallery-overlay">
+                        <span class="zoom-icon">+</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item">
+                    <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.53 AM.jpeg" alt="With Dignitaries">
+                    <div class="gallery-overlay">
+                        <span class="zoom-icon">+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="section-header reveal" style="margin-top: 4rem;">
+                <h2 class="section-title">Video Highlights</h2>
+            </div>
+
+            <div class="video-grid reveal delay-200">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.54 AM (1).jpeg" alt="Video Thumb">
+                        <div class="play-btn"></div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Speech on Railway Budget</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Demanding better connectivity for tribal districts in
+                            the Parliament.</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="assets/photos/WhatsApp Image 2026-01-30 at 10.50.54 AM.jpeg" alt="Video Thumb">
+                        <div class="play-btn"></div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Jan Samvad Yatra Highlights</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Interacting with citizens across 50 villages
+                            regarding water issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" src="" alt="Full view">
+    </div>
+
+    <!-- Footer Include -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>About GSP</h4>
+                    <p style="color: #aaa; margin-bottom: 1rem;">Gajendra Singh Patel is a dedicated social worker and
+                        Member of Parliament serving the Khargone-Barwani constituency.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Biography</a></li>
+                        <li><a href="parliament.html">Parliament Work</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-links">
+                        <li>📍 MP Office, Barwani, M.P.</li>
+                        <li>📧 contact@gspbjp.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Gajendra Singh Patel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Simple Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const closeLightbox = document.querySelector('.close-lightbox');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.style.display = 'none';
+        });
+
+        // Filter Logic (Simple Visual)
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // You would add actual filtering logic here by hiding/showing items
+            });
+        });
+    </script>
+</body>
+
+</html>
