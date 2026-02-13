@@ -11,8 +11,8 @@ class CanvasSequence {
         this.heroSection = document.querySelector('.hero-section') || document.querySelector('.homepage-hero');
 
         // Configuration
-        this.frameCount = 80; // Adjusted based on standard sequence length
-        this.basePath = 'assets/images/hero Section animation/sequence/frame_'; // Path to frames
+        this.frameCount = 109; // User provided 109 frames
+        this.basePath = 'assets/images/hero-animation-sequence/GSP Animation file'; // Path to frames
         this.images = [];
         this.loadedCount = 0;
 
@@ -43,16 +43,19 @@ class CanvasSequence {
 
     preloadImages() {
         const promises = [];
-        for (let i = 1; i <= this.frameCount; i++) {
+        for (let i = 0; i < this.frameCount; i++) {
             const img = new Image();
-            img.src = `${this.basePath}${String(i).padStart(3, '0')}.webp`; // Expecting WebP for better compression
+            img.src = `${this.basePath}${String(i).padStart(3, '0')}.png`;
 
             const promise = new Promise((resolve) => {
                 img.onload = () => {
                     this.loadedCount++;
                     resolve();
                 };
-                img.onerror = resolve; // Continue even if one fails
+                img.onerror = () => {
+                    console.error(`Failed to load frame: ${img.src}`);
+                    resolve();
+                };
             });
 
             this.images.push(img);
