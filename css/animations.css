@@ -723,19 +723,33 @@
         flex-direction: column;
         text-align: center;
         gap: 3.5rem;
+        padding-top: 40px;
     }
 
     .hero-content {
         order: 2;
+        padding-right: 0;
+        /* Reset desktop-only padding */
+        width: 100%;
     }
 
     .hero-logo-large {
         order: 1;
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        margin: 0 auto;
+        max-width: 100%;
+        /* Scale down to viewport */
     }
 
     .hero-portrait {
         order: 3;
         justify-content: center;
+        padding-left: 0;
+        /* Reset desktop-only padding */
+        width: 100%;
     }
 
     .hero-actions {
@@ -745,6 +759,14 @@
     .hero-content .sub-title {
         margin-left: auto;
         margin-right: auto;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-logo-large {
+        max-width: 90%;
+        /* Ensure animation isn't too cramped */
     }
 }
 
