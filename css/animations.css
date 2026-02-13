@@ -681,7 +681,8 @@
     align-items: center;
 }
 
-.hero-logo-large img {
+.hero-logo-large img,
+.hero-logo-large video {
     width: 260px;
     height: auto;
     filter: drop-shadow(0 15px 45px rgba(255, 107, 0, 0.2));
