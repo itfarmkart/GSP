@@ -644,8 +644,9 @@
 }
 
 .hero-content {
-    flex: 1.8;
-    min-width: 420px;
+    flex: 1;
+    z-index: 5;
+    position: relative;
 }
 
 .hero-content .main-title {
@@ -675,24 +676,32 @@
 }
 
 .hero-logo-large {
-    flex: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
+    pointer-events: none;
 }
 
 .hero-logo-large canvas {
     width: 100%;
-    max-width: 400px;
+    max-width: 1000px;
     height: auto;
     aspect-ratio: 16/9;
-    /* Adjusted for standard sequence aspect ratio */
 }
 
 .hero-portrait {
-    flex: 1.5;
+    flex: 1;
     display: flex;
     justify-content: flex-end;
+    position: relative;
+    z-index: 5;
 }
 
 .hero-portrait img {
