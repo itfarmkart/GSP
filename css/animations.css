@@ -645,7 +645,7 @@
 
 .hero-content {
     flex: 1;
-    min-width: 320px;
+    padding-right: 180px;
 }
 
 .hero-content .main-title {
@@ -663,8 +663,9 @@
 .hero-content .sub-title {
     color: #444444 !important;
     font-size: 1.1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     max-width: 100%;
+    line-height: 1.6;
 }
 
 .hero-actions {
@@ -700,6 +701,7 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    padding-left: 180px;
 }
 
 .hero-portrait img {
