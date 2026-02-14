@@ -657,7 +657,7 @@
 }
 
 .text-saffron-dark {
-    color: var(--color-saffron-dark);
+    color: var(--color-saffron);
 }
 
 .hero-content .sub-title {
@@ -769,4 +769,3 @@
         /* Ensure animation isn't too cramped */
     }
 }
-

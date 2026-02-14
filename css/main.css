@@ -82,9 +82,7 @@ h6 {
 }
 
 .text-gradient {
-    background: linear-gradient(45deg, var(--color-saffron), var(--color-saffron-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-saffron);
 }
 
 /* Container */
@@ -249,7 +247,7 @@ h6 {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-saffron), var(--color-saffron-dark));
+    background: var(--color-saffron);
     color: white;
     box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
 }
