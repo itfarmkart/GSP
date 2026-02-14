@@ -18,10 +18,10 @@
     --text-secondary: #4A4A4A;
     --text-light: #F0F0F0;
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, #FF6B00 0%, #FF8F40 50%, #FFFFFF 100%);
-    --gradient-bjp: linear-gradient(to right, #FF6B00, #FFFFFF, #138808);
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.9) 100%);
+    /* Gradients (Standardized to solid for flat design) */
+    --gradient-hero: var(--color-saffron);
+    --gradient-bjp: var(--color-saffron);
+    --gradient-card: #FFFFFF;
 
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
