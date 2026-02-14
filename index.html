@@ -10,48 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Home Specific Styles */
-        .hero {
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(-45deg, #FF6B00, #FF8F40, #cc5500, #ff9955);
-            background-size: 400% 400%;
-            animation: heroGradient 10s ease infinite;
-            position: relative;
-            color: white;
-            padding-top: 80px;
-            cursor: none;
-            overflow: hidden;
-        }
-
-        @keyframes heroGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.1) 0%, transparent 60%);
-            z-index: 1;
-            pointer-events: none;
-        }
 
 
         .hero-content {
@@ -395,7 +353,6 @@
 
     <!-- Refined 3-Column Hero Section -->
     <header class="hero-section">
-        <div class="hero-background-gradient"></div>
         <div class="container hero-layout">
             <div class="hero-content">
                 <span class="tagline">जनसेवा ही धर्म</span>
